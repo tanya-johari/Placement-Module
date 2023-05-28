@@ -1,5 +1,5 @@
 .footer-style {
-  /* background-color: #101018f8; */
+  background-color: var(--black); 
   color: #fff;
   font-size: 1em;
   font-family: serif;

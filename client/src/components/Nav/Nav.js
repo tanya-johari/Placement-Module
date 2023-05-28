@@ -33,7 +33,7 @@ function Nav() {
     <nav className="navbar">
       <Link to="/" className="navbar_logo">
         BVICAM
-        <FaUniversity style={{ color: "#f9032f", margin: "2px" }} />
+        <FaUniversity style={{ color: "white", margin: "2px" }} />
       </Link>
 
       <li>

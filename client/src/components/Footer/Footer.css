@@ -10,7 +10,7 @@
 }
 .footer_desc h1 {
   margin-bottom: 2rem;
-  color: var(--red);
+  color: var(--white);
   font-size: 1.5rem;
 }
 .footer_desc p {
@@ -34,7 +34,7 @@
 .footer_title {
   font-size: 14px;
   margin-bottom: 16px;
-  color: var(--red);
+  color: var(--white);
 }
 .footer_link {
   text-decoration: none;

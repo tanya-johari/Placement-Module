@@ -197,10 +197,10 @@ function Companies() {
                   
                   {
                    
-                    !admin || admin === "" ? (
+                    !admin || admin === ""? (
                       <>
                       <TableCell className={classes.tableData} align="left">
-                      <btn className="login-btn" onClick = {() => registerdrive(company)}>Register</btn>
+                      <btn style={{color:"orange"}} className="login-btn" onClick = {() => registerdrive(company)}>Register</btn>
                       </TableCell>
                       </>
                     ) : null
