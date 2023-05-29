@@ -190,15 +190,16 @@ app.post("/refercompany", (req, res) => {
   const email = req.body.email;
   const phone = req.body.phone;
   const hrname = req.body.hrname;
-
+  const usn = req.body.usn;
   db.query(
-    "INSERT INTO refercompany (cname,cdescription,email,phone,hrname) VALUES (?,?,?,?,?)",
+    "INSERT INTO refercompany (cname,cdescription,email,phone,hrname,usn) VALUES (?,?,?,?,?,?)",
     [
       cname,
       cdescription,
       email,
       phone,
       hrname,
+      usn,
     ],
     (err, result) => {
       if (err) {

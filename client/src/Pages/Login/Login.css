@@ -52,6 +52,7 @@ body {
   outline: none;
   background: transparent;
 }
+
 .login-box .user-box label {
   position: absolute;
   top: 0;
@@ -63,12 +64,12 @@ body {
   transition: 0.5s;
 }
 
-.login-box .user-box input:focus ~ label,
+
 .login-box .user-box input:valid ~ label {
-  top: -20px;
+  top: 0px;
   left: 0;
   color: var(--white);
-  font-size: 12px;
+  font-size: 0px;
 }
 
 .login-box btn {

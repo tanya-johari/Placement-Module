@@ -48,7 +48,7 @@
   .add-company-box .add-company-form input:valid ~ label {
     top: -20px;
     left: 0;
-    color: var(--red);
+    color: var(--white);
     font-size: 12px;
   }
   

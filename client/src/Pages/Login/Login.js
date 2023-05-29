@@ -103,7 +103,7 @@ function Login() {
       pass: passwordReg,
     }).then((response) => {
       if (response.data.err) {
-        return toast(" User already exists", { type: "error" });
+        return toast("Invalid Enroll No./Password", { type: "error" });
       } else if (response.data.message) {
         return toast("", { type: "error" });
       } else if (response.data) {
@@ -161,7 +161,7 @@ function Login() {
                 name=""
                 onChange={(e) => setUsn(e.target.value)}
               />
-              <label>USN</label>
+              <label>Enrollment No.</label>
             </div>
             <div className="user-box">
               <input
@@ -193,7 +193,7 @@ function Login() {
                 required="true"
                 onChange={(e) => setUsernameReg(e.target.value)}
               />
-              <label>USN</label>
+              <label>Enrollment No.(11 digits)</label>
             </div>
             <div className="user-box">
               <input
@@ -202,7 +202,7 @@ function Login() {
                 required="true"
                 onChange={(e) => setPasswordReg(e.target.value)}
               />
-              <label>Password</label>
+              <label>Password (length: 8 characters)</label>
             </div>
             <btn className="login-btn" onClick={register}>
               <span></span>

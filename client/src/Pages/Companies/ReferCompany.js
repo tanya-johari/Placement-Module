@@ -2,6 +2,8 @@ import Axios from "axios";
 import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "./ReferCompany.css";
+import { useStateValue } from "../../Context/StateProvider";
+
 function ReferCompany() {
   const [cname, setCname] = useState("");
   const [cdescription, setCdescription] = useState("");
@@ -10,6 +12,8 @@ function ReferCompany() {
   const [hrname, sethrname] = useState("");
   const baseUrl = "http://localhost:3001";
 
+  const [user , dispatchUser] = useStateValue();
+
   const referCompany = () => {
     Axios.post(`${baseUrl}/refercompany`, {
       cname: cname,
@@ -17,6 +21,7 @@ function ReferCompany() {
       email: email,
       phone: phone,
       hrname: hrname,
+      usn: user.user[0].usn,
     }).then((response) => {
        //if (response.data.message) {
         //return toast(" User already exists", { type: "error" });
