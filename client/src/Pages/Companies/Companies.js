@@ -216,7 +216,10 @@ function Companies() {
       {!admin || admin === "" ? (
         <>
           <div class="float" onClick={handleOpen}>
-            <FaPlus className="my-float" />
+            <br/>
+          <label>Refer Company</label>
+          <br/>
+            <btn className="my-float" />
           </div>
           <Modal
             open={open}
