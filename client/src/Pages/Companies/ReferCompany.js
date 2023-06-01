@@ -42,6 +42,7 @@ function ReferCompany() {
             type="text"
             required="true"
             name=""
+            maxLength={10}
             onChange={(e) => setCname(e.target.value)}
           />
           <label>Company Name</label>
@@ -51,10 +52,12 @@ function ReferCompany() {
             type="text"
             required="true"
             name=""
+            maxLength={30}
             onChange={(e) => setCdescription(e.target.value)}
           />
           <label>Company Info</label>
         </div>
+        
         <div className="add-company-form">
           <input
             type="text"
@@ -69,6 +72,7 @@ function ReferCompany() {
             type="text"
             required="true"
             name=""
+            maxLength={10}
             onChange={(e) => setPhone(e.target.value)}
           />
           <label>HR Phone</label>
@@ -78,6 +82,7 @@ function ReferCompany() {
             type="text"
             required="true"
             name=""
+            maxLength={10}
             onChange={(e) => sethrname(e.target.value)}
           />
           <label>HR NAME</label>

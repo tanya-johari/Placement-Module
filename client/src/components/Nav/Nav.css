@@ -1,5 +1,5 @@
 .navbar {
-  background: var(--black);
+  background: var(--red);
   height: 60px;
   padding: 0.5rem calc((100vw - 1200px) / 2);
   display: flex;
@@ -42,10 +42,10 @@
   color: var(--red);
 }
 .navbar_link:hover {
-  color: var(--red);
+  color: var(--black);
 }
 .navbar_link:active {
-  color: var(--red);
+  color: var(--black);
 }
 
 .my-float {

@@ -32,8 +32,9 @@ function Nav() {
   return (
     <nav className="navbar">
       <Link to="/" className="navbar_logo">
-        BVICAM
-        <FaUniversity style={{ color: "white", margin: "2px" }} />
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRMN5uL8M6kTZ2jbND8iLtcvtKPXMzGp2VfuV-IVydBQ&s" width={120} height={50}></img>
+       <h2>BVICAM</h2> 
+      
       </Link>
 
       <li>

@@ -5,7 +5,20 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: linear-gradient(rgba(239 231 231), rgb(211, 88, 88));
+  background: linear-gradient(rgb(226, 235, 240), rgba(8, 47, 132, 0.858));
+}
+
+.header img {
+  position: absolute;
+  float: left;
+  width: 120px;
+  left: 300px;
+}
+
+.header h1 {
+  position: relative;
+  float: right;
+  left: 10px;
 }
 
 .tablist {
@@ -76,8 +89,8 @@ body {
   position: relative;
   display: inline-block;
   padding: 10px 20px;
-  color: var(--white);
-  background: #c42020;
+  color: var(--red);
+  background: #cdd6dbfd;
   font-size: 16px;
   text-decoration: none;
   text-transform: uppercase;

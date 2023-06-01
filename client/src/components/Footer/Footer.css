@@ -3,7 +3,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   color: var(--white);
-  background: var(--black);
+  background: var(--red);
 }
 .footer_desc {
   padding: 0 2rem;
@@ -44,7 +44,7 @@
   transition: 0.3s ease-in-out;
 }
 .footer_link:hover {
-  color: var(--red);
+  color: var(--black);
 }
 @media screen and (max-width: 820px) {
   .footer_wrapper {
