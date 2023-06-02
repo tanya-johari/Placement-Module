@@ -23,7 +23,11 @@ function TabPanel(props) {
       {...other}
     >
       <br/>
+
+      <div className="header">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRMN5uL8M6kTZ2jbND8iLtcvtKPXMzGp2VfuV-IVydBQ&s"></img>
       <h1> BVICAM  PLACEMENT  PORTAL </h1>
+      </div>
 
       {value === index && (
         <Box p={3}>
@@ -51,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: "transparent",
-    color: "#c42020",
+    color: "#c80a0a",
     display: "flex",
   },
   tabs: {
@@ -157,8 +161,9 @@ function Login() {
             <div className="user-box">
               <input
                 type="text"
-                required="true"
                 name=""
+                required="true"
+                maxLength={11}
                 onChange={(e) => setUsn(e.target.value)}
               />
               <label>Enrollment No.</label>
@@ -168,6 +173,7 @@ function Login() {
                 type="password"
                 name=""
                 required="true"
+                maxLength={8}
                 onChange={(e) => setPass(e.target.value)}
               />
               <label>Password</label>
@@ -191,6 +197,7 @@ function Login() {
                 type="text"
                 name=""
                 required="true"
+                maxLength={11}
                 onChange={(e) => setUsernameReg(e.target.value)}
               />
               <label>Enrollment No.(11 digits)</label>
@@ -200,6 +207,7 @@ function Login() {
                 type="password"
                 name=""
                 required="true"
+                maxLength={8}
                 onChange={(e) => setPasswordReg(e.target.value)}
               />
               <label>Password (length: 8 characters)</label>
@@ -232,6 +240,7 @@ function Login() {
                 type="password"
                 name=""
                 required="true"
+                maxLength={8}
                 onChange={(e) => setAdminPass(e.target.value)}
               />
               <label>Password</label>
