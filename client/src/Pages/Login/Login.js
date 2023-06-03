@@ -67,11 +67,24 @@ const useStyles = makeStyles((theme) => ({
 
 function Login() {
   const [usn, setUsn] = useState("");
+  const [usnError, setUsnError] = useState("");
+
   const [pass, setPass] = useState("");
+  const [passError, setPassError] = useState("");
+
+  
   const [adminEmail, setAdminEmail] = useState("");
+  const [adminEmailError, setAdminEmailError] = useState("");
+
   const [adminPass, setAdminPass] = useState("");
+  const [adminPassError, setAdminPassError] = useState("");
+
   const [usernameReg, setUsernameReg] = useState("");
+  const [usernameRegError, setUsernameRegError] = useState("");
+
   const [passwordReg, setPasswordReg] = useState("");
+  const [passwordRegError, setPasswordRegError] = useState("");
+
   /* eslint-disable */
   const baseUrl = "http://localhost:3001";
   const [{ userState }, dispatchUser] = useStateValue();
@@ -83,13 +96,124 @@ function Login() {
     setValue(newValue);
   };
 
+  const handleLogin = (event) => {
+    event.preventDefault();
+  };
+
+  const handleRegister = (event) => {
+    event.preventDefault();
+
+  };
+
+  const handleAdmin = (event) => {
+    event.preventDefault();
+  };
+  
+  const handleAdminEmailChange = (e) => {
+    setAdminEmail(e.target.value);
+    if(!isValidAdminEmail(e.target.value)) {
+      setAdminEmailError("Please enter a valid email ID!");
+    }
+    else {
+      setAdminEmailError("");
+    }
+  };
+
+  const handleAdminPassChange = (e) => {
+    setAdminPass(e.target.value);
+    if(!isValidAdminPass(e.target.value)) {
+      setAdminPassError("Please enter password of length 4-8 characters!");
+    }
+    else {
+      setAdminPassError("");
+    }
+
+  };
+
+  const isValidAdminEmail = (adminEmail) => {
+    const adminemailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    return adminemailPattern.test(adminEmail);
+  
+  };
+
+  const isValidAdminPass = (adminPass) => {
+    const adminpassPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-z]{4,}$/;
+    return adminpassPattern.test(adminPass);
+  };
+
+  const handleUsnChange = (e) => {
+    setUsn(e.target.value);
+    if(!isValidUsn(e.target.value)) {
+      setUsnError("Please enter a valid 11 digits enrollment number!");
+    }
+    else {
+      setUsnError("");
+    }
+  };
+
+  const handlePassChange = (e) => {
+    setPass(e.target.value);
+    if(!isValidPass(e.target.value)) {
+      setPassError("Please enter password of length 4-8 characters!");
+    }
+    else {
+      setPassError("");
+    }
+
+  };
+
+  const isValidUsn = (usn) => {
+    const usnPattern = /^[0-9]{11}$/;
+    return usnPattern.test(usn);
+  
+  };
+
+  const isValidPass = (pass) => {
+    const passPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-z]{4,}$/;
+    return passPattern.test(pass);
+  };
+
+  const handleUsernameRegChange = (e) => {
+    setUsernameReg(e.target.value);
+    if(!isValidUsernameReg(e.target.value)) {
+      setUsernameRegError("Please enter a valid 11 digits enrollment number!");
+    }
+    else {
+      setUsernameRegError("");
+    }
+  };
+
+  const handlePasswordRegChange = (e) => {
+    setPasswordReg(e.target.value);
+    if(!isValidPasswordReg(e.target.value)) {
+      setPasswordRegError("Please enter password of length 4-8 characters! It should contain atleast one lower case, one upper case alphabet and atleast one digit!");
+    }
+    else {
+      setPasswordRegError("");
+    }
+
+  };
+
+  const isValidUsernameReg = (usernameReg) => {
+    const usernamePattern = /^[0-9]{11}$/;
+    return usernamePattern.test(usernameReg);
+  
+  };
+
+  const isValidPasswordReg = (passwordReg) => {
+    const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-z]{4,}$/;
+    return passwordPattern.test(passwordReg);
+  };
+
+
+
   const login = () => {
     Axios.post(`${baseUrl}/login`, {
       usn: usn,
       pass: pass,
     }).then((response) => {
       if (response.data.message) {
-        return toast("Invalid Username/Password", { type: "error" });
+        return toast("Invalid Enroll No./Password", { type: "error" });
       } else {
         dispatchUser({
           type: actionTypes.SET_USER,
@@ -125,7 +249,7 @@ function Login() {
       pass: adminPass,
     }).then((response) => {
       if (response.data.message) {
-        return toast("Invalid Username/Password", { type: "error" });
+        return toast("Invalid Email ID/Password", { type: "error" });
       } else {
         dispatchAdmin({
           type: actionTypes.SET_ADMIN,
@@ -157,27 +281,33 @@ function Login() {
       
         <div className=" login-box login-box-1">
           <h2>Student Login</h2>
-          <form>
+          <form onSubmit={handleLogin}>
             <div className="user-box">
               <input
                 type="text"
-                name=""
+                name="usn"
+                id="usn"
+                value={usn}
                 required="true"
                 maxLength={11}
-                onChange={(e) => setUsn(e.target.value)}
+                onChange={handleUsnChange}
               />
               <label>Enrollment No.</label>
             </div>
+            {usn &&<div><p style={{color:"#ee7b5c"}}>{usnError}</p></div>}
             <div className="user-box">
               <input
                 type="password"
-                name=""
+                name="pass"
+                id="pass"
+                value={pass}
                 required="true"
                 maxLength={8}
-                onChange={(e) => setPass(e.target.value)}
+                onChange={handlePassChange}
               />
               <label>Password</label>
             </div>
+            {pass &&<div><p style={{color:"#ee7b5c"}}>{passError}</p></div>}
             <btn className="login-btn" onClick={login}>
               <span></span>
               <span></span>
@@ -191,27 +321,34 @@ function Login() {
       <TabPanel value={value} index={1}>
         <div className="login-box login-box-2">
           <h2>Register</h2>
-          <form>
+          <form onSubmit={handleRegister}>
             <div className="user-box">
               <input
                 type="text"
-                name=""
+                name="usernameReg"
+                id="usernameReg"
+                value={usernameReg}
                 required="true"
                 maxLength={11}
-                onChange={(e) => setUsernameReg(e.target.value)}
+                onChange={handleUsernameRegChange}
               />
-              <label>Enrollment No.(11 digits)</label>
+              <label>Enrollment Number</label>
             </div>
+            {usernameReg && <div><p style={{color:"#ee7b5c"}}>{usernameRegError}</p></div>}
             <div className="user-box">
               <input
                 type="password"
-                name=""
+                name="passwordReg"
+                id="passwordReg"
+                value={passwordReg}
                 required="true"
                 maxLength={8}
-                onChange={(e) => setPasswordReg(e.target.value)}
+                onChange={handlePasswordRegChange}
               />
-              <label>Password (length: 8 characters)</label>
+              <label>Password</label>
+              
             </div>
+            {passwordReg && <div><p style={{color:"#ee7b5c"}}>{passwordRegError}</p></div>}
             <btn className="login-btn" onClick={register}>
               <span></span>
               <span></span>
@@ -225,26 +362,33 @@ function Login() {
       <TabPanel value={value} index={2}>
         <div className=" login-box login-box-3">
           <h2>Admin Login</h2>
-          <form>
+          <form onSubmit={handleAdmin}>
             <div className="user-box">
               <input
                 type="text"
                 required="true"
-                name=""
-                onChange={(e) => setAdminEmail(e.target.value)}
+                name="adminEmail"
+                id="adminEmail"
+                value={adminEmail}
+                maxLength={20}
+                onChange={handleAdminEmailChange}
               />
               <label>Email</label>
             </div>
+            {adminEmail &&<div><p style={{color:"#ee7b5c"}}>{adminEmailError}</p></div>}
             <div className="user-box">
               <input
                 type="password"
-                name=""
+                name="adminPass"
+                id="adminPass"
+                value={adminPass}
                 required="true"
                 maxLength={8}
-                onChange={(e) => setAdminPass(e.target.value)}
+                onChange={handleAdminPassChange}
               />
               <label>Password</label>
             </div>
+            {adminPass &&<div><p style={{color:"#ee7b5c"}}>{adminPassError}</p></div>}
             <btn className="login-btn" onClick={adminLogin}>
               <span></span>
               <span></span>
