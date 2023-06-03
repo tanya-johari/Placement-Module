@@ -10,9 +10,9 @@ CREATE TABLE studentdetails (
   dob date NOT NULL,
   branch varchar(10) NOT NULL,
   cgpa float NOT NULL,
+  
   PRIMARY KEY (stid,usn)
 );
-
 
 
 CREATE TABLE slogin (
