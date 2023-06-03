@@ -14,11 +14,13 @@ function ReferCompany() {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   
-  const [phone, setPhone] = useState(0);
-  const [phoneError, setPhoneError] = useState(0);
+  const [phone, setPhone] = useState("");
+  const [phoneError, setPhoneError] = useState("");
 
   const [hrname, sethrname] = useState("");
   const [hrnameError, sethrnameError] = useState("");
+
+  const [error, setError] = useState("");
 
   const baseUrl = "http://localhost:3001";
 
@@ -26,7 +28,10 @@ function ReferCompany() {
 
   const handleRefer = (event) => {
     event.preventDefault();
+    
   };
+
+  
 
   const handleCnameChange = (e) => {
     setCname(e.target.value);
@@ -84,7 +89,7 @@ function ReferCompany() {
   };
 
   const isValidPhone = (phone) => {
-    const phonePattern = /^\d{10}$/;
+    const phonePattern = /^[0-9]{10}$/;
     return phonePattern.test(phone);
   };
 
@@ -117,14 +122,14 @@ function ReferCompany() {
         //return toast(" User already exists", { type: "error" });
        //}
       if (response.data.err) {
-        return toast(" Company already exists", { type: "error" });
+        return toast("Some error", { type: "error" });
       } else 
       return toast("Successfully Added", { type: "success" });
   });
   };
   return (
     <div className=" add-company-box">
-      <ToastContainer position="bottom-center" />
+      
       <h2>Refer a company</h2>
       <form onSubmit={handleRefer}>
         <div className="add-company-form">
@@ -140,7 +145,7 @@ function ReferCompany() {
           />
           <label>Company Name</label>
         </div>
-        {cname &&<div>{cnameError}</div>}
+        {cname &&<div><p style={{color: "wheat"}}>{cnameError}</p></div>}
         <div className="add-company-form">
           <input
             type="text"
@@ -154,7 +159,7 @@ function ReferCompany() {
           />
           <label>Company Info</label>
         </div>
-        {cdescription &&<div>{cdescriptionError}</div>}
+        {cdescription &&<div><p style={{color: "wheat"}}>{cdescriptionError}</p></div>}
         <div className="add-company-form">
           <input
             type="text"
@@ -166,7 +171,7 @@ function ReferCompany() {
           />
           <label>HR Email</label>
         </div>
-        {email &&<div>{emailError}</div>}
+        {email &&<div><p style={{color: "wheat"}}>{emailError}</p></div>}
         <div className="add-company-form">
           <input
             type="text"
@@ -178,7 +183,7 @@ function ReferCompany() {
           />
           <label>HR Phone</label>
         </div>
-        {phone &&<div>{phoneError}</div>}
+        {phone &&<div><p style={{color: "wheat"}}>{phoneError}</p></div>}
         <div className="add-company-form">
           <input
             type="text"
@@ -190,7 +195,7 @@ function ReferCompany() {
           />
           <label>HR NAME</label>
         </div>
-        {hrname &&<div>{hrnameError}</div>}    
+        {hrname &&<div><p style={{color: "wheat"}}>{hrnameError}</p></div>}    
         <btn onClick={referCompany}>Submit</btn>
       </form>
     </div>

@@ -370,7 +370,6 @@ function Login() {
                 name="adminEmail"
                 id="adminEmail"
                 value={adminEmail}
-                maxLength={20}
                 onChange={handleAdminEmailChange}
               />
               <label>Email</label>

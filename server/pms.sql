@@ -70,7 +70,8 @@ CREATE TABLE refercompany (
   usn numeric(11) NOT NULL,
   referdate DATETIME DEFAULT CURRENT_TIMESTAMP,
   status BOOLEAN DEFAULT TRUE,
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  FOREIGN KEY (usn) REFERENCES studentdetails(usn) ON DELETE CASCADE
 );
 
 
