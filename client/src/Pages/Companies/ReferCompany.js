@@ -61,7 +61,7 @@ function ReferCompany() {
   const handleCdescriptionChange = (e) => {
     setCdescription(e.target.value);
     if(!isValidCdescription(e.target.value)) {
-      setCdescriptionError("It can not be empty!");
+      setCdescriptionError("");
     }
     else{
       setCdescriptionError("");
