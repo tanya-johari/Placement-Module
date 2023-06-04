@@ -125,13 +125,16 @@ function Login() {
     if(!usernameReg || !passwordReg) {
       return toast("Please fill out all the fields", {type: 'warning'});
     }
+    if(!isValidPasswordReg(passwordReg)) {
+      return toast("Please Check your input fields", {type: 'info'});
+    }
 
       Axios.post(`${baseUrl}/register`, {
         usn: usernameReg,
         pass: passwordReg,
       }).then((response) => {
         if (response.data.err) {
-          return toast("Invalid Enroll No./Password", { type: "error" });
+          return toast("Invalid Enroll No.", { type: "error" });
         } else if (response.data.message) {
           return toast("", { type: "error" });
         } else if (response.data) {
