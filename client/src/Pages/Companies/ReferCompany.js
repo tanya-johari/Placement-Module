@@ -1,6 +1,6 @@
 import Axios from "axios";
 import React, { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "./ReferCompany.css";
 import { useStateValue } from "../../Context/StateProvider";
 
@@ -14,20 +14,38 @@ function ReferCompany() {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState();
   const [phoneError, setPhoneError] = useState("");
 
   const [hrname, sethrname] = useState("");
   const [hrnameError, sethrnameError] = useState("");
 
-  const [error, setError] = useState("");
-
   const baseUrl = "http://localhost:3001";
 
-  const [user , dispatchUser] = useStateValue();
+  const [user] = useStateValue();
 
   const handleRefer = (event) => {
     event.preventDefault();
+    if(!cname || !cdescription || !email || !phone || !hrname) {
+      return toast("Please fill out all the fields!", {type: 'warning'});
+    }
+
+      Axios.post(`${baseUrl}/refercompany`, {
+        cname: cname,
+        cdescription: cdescription,
+        email: email,
+        phone: phone,
+        hrname: hrname,
+        usn: user.user[0].usn,
+      }).then((response) => {
+         //if (response.data.message) {
+          //return toast(" User already exists", { type: "error" });
+         //}
+        if (response.data.err) {
+          return toast("Some error", { type: "error" });
+        } else 
+        return toast("Successfully Added", { type: "success" });
+    });
     
   };
 
@@ -109,29 +127,12 @@ function ReferCompany() {
   
   };
 
-  const referCompany = () => {
-    Axios.post(`${baseUrl}/refercompany`, {
-      cname: cname,
-      cdescription: cdescription,
-      email: email,
-      phone: phone,
-      hrname: hrname,
-      usn: user.user[0].usn,
-    }).then((response) => {
-       //if (response.data.message) {
-        //return toast(" User already exists", { type: "error" });
-       //}
-      if (response.data.err) {
-        return toast("Some error", { type: "error" });
-      } else 
-      return toast("Successfully Added", { type: "success" });
-  });
-  };
+  
   return (
     <div className=" add-company-box">
       
       <h2>Refer a company</h2>
-      <form onSubmit={handleRefer}>
+      <form>
         <div className="add-company-form">
           <input
             type="text"
@@ -178,12 +179,12 @@ function ReferCompany() {
             required="true"
             name="phone"
             id="phone"
-            value={phone}
+            //value={phone}
             onChange={handlePhoneChange}
           />
           <label>HR Phone</label>
         </div>
-        {phone &&<div><p style={{color: "wheat"}}>{phoneError}</p></div>}
+        {<div><p style={{color: "wheat"}}>{phoneError}</p></div>}
         <div className="add-company-form">
           <input
             type="text"
@@ -196,7 +197,7 @@ function ReferCompany() {
           <label>HR NAME</label>
         </div>
         {hrname &&<div><p style={{color: "wheat"}}>{hrnameError}</p></div>}    
-        <btn onClick={referCompany}>Submit</btn>
+        <btn onClick={handleRefer}>Submit</btn>
       </form>
     </div>
   );

@@ -98,15 +98,70 @@ function Login() {
 
   const handleLogin = (event) => {
     event.preventDefault();
+    if(!usn || !pass) {
+      return toast("Please fill out all the fields!", {type: 'warning'});
+    }
+
+      Axios.post(`${baseUrl}/login`, {
+        usn: usn,
+        pass: pass,
+      }).then((response) => {
+        if (response.data.message) {
+          return toast("Invalid Enroll No./Password", { type: "error" });
+        } else {
+          dispatchUser({
+            type: actionTypes.SET_USER,
+            user: response.data,
+          });
+          console.log("====================================");
+          console.log(response.data);
+          console.log("====================================");
+        }
+      });
   };
 
   const handleRegister = (event) => {
     event.preventDefault();
+    if(!usernameReg || !passwordReg) {
+      return toast("Please fill out all the fields", {type: 'warning'});
+    }
+
+      Axios.post(`${baseUrl}/register`, {
+        usn: usernameReg,
+        pass: passwordReg,
+      }).then((response) => {
+        if (response.data.err) {
+          return toast("Invalid Enroll No./Password", { type: "error" });
+        } else if (response.data.message) {
+          return toast("", { type: "error" });
+        } else if (response.data) {
+          console.log("====================================");
+          console.log(response.data);
+          console.log("====================================");
+          return toast(" Succesfully Registered", { type: "success" });
+        }
+      });
 
   };
 
   const handleAdmin = (event) => {
     event.preventDefault();
+    if(!adminEmail || !adminPass) {
+      return toast("Please fill out all fields!", {type: 'warning'});
+    }
+      Axios.post(`${baseUrl}/admin`, {
+        email: adminEmail,
+        pass: adminPass,
+      }).then((response) => {
+        if (response.data.message) {
+          return toast("Invalid Email ID/Password", { type: "error" });
+        } else {
+          dispatchAdmin({
+            type: actionTypes.SET_ADMIN,
+            admin: response.data,
+          });
+        }
+      });
   };
   
   const handleAdminEmailChange = (e) => {
@@ -205,60 +260,6 @@ function Login() {
     return passwordPattern.test(passwordReg);
   };
 
-
-
-  const login = () => {
-    Axios.post(`${baseUrl}/login`, {
-      usn: usn,
-      pass: pass,
-    }).then((response) => {
-      if (response.data.message) {
-        return toast("Invalid Enroll No./Password", { type: "error" });
-      } else {
-        dispatchUser({
-          type: actionTypes.SET_USER,
-          user: response.data,
-        });
-        console.log("====================================");
-        console.log(response.data);
-        console.log("====================================");
-      }
-    });
-  };
-  const register = () => {
-    Axios.post(`${baseUrl}/register`, {
-      usn: usernameReg,
-      pass: passwordReg,
-    }).then((response) => {
-      if (response.data.err) {
-        return toast("Invalid Enroll No./Password", { type: "error" });
-      } else if (response.data.message) {
-        return toast("", { type: "error" });
-      } else if (response.data) {
-        console.log("====================================");
-        console.log(response.data);
-        console.log("====================================");
-        return toast(" Succesfully Registered", { type: "success" });
-      }
-    });
-  };
-
-  const adminLogin = () => {
-    Axios.post(`${baseUrl}/admin`, {
-      email: adminEmail,
-      pass: adminPass,
-    }).then((response) => {
-      if (response.data.message) {
-        return toast("Invalid Email ID/Password", { type: "error" });
-      } else {
-        dispatchAdmin({
-          type: actionTypes.SET_ADMIN,
-          admin: response.data,
-        });
-      }
-    });
-  };
-
   return (
     <div className={classes.root}>
       <ToastContainer position="bottom-center" />
@@ -281,7 +282,7 @@ function Login() {
       
         <div className=" login-box login-box-1">
           <h2>Student Login</h2>
-          <form onSubmit={handleLogin}>
+          <form>
             <div className="user-box">
               <input
                 type="text"
@@ -308,7 +309,7 @@ function Login() {
               <label>Password</label>
             </div>
             {pass &&<div><p style={{color:"#ee7b5c"}}>{passError}</p></div>}
-            <btn className="login-btn" onClick={login}>
+            <btn className="login-btn" onClick={handleLogin}>
               <span></span>
               <span></span>
               <span></span>
@@ -321,7 +322,7 @@ function Login() {
       <TabPanel value={value} index={1}>
         <div className="login-box login-box-2">
           <h2>Register</h2>
-          <form onSubmit={handleRegister}>
+          <form>
             <div className="user-box">
               <input
                 type="text"
@@ -349,7 +350,7 @@ function Login() {
               
             </div>
             {passwordReg && <div><p style={{color:"#ee7b5c"}}>{passwordRegError}</p></div>}
-            <btn className="login-btn" onClick={register}>
+            <btn className="login-btn" onClick={handleRegister}>
               <span></span>
               <span></span>
               <span></span>
@@ -362,7 +363,7 @@ function Login() {
       <TabPanel value={value} index={2}>
         <div className=" login-box login-box-3">
           <h2>Admin Login</h2>
-          <form onSubmit={handleAdmin}>
+          <form>
             <div className="user-box">
               <input
                 type="text"
@@ -388,7 +389,7 @@ function Login() {
               <label>Password</label>
             </div>
             {adminPass &&<div><p style={{color:"#ee7b5c"}}>{adminPassError}</p></div>}
-            <btn className="login-btn" onClick={adminLogin}>
+            <btn className="login-btn" onClick={handleAdmin}>
               <span></span>
               <span></span>
               <span></span>
