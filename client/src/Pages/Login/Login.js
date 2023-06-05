@@ -288,7 +288,7 @@ function Login() {
           <form>
             <div className="user-box">
               <input
-                type="text"
+                type="number"
                 name="usn"
                 id="usn"
                 value={usn}
@@ -328,7 +328,7 @@ function Login() {
           <form>
             <div className="user-box">
               <input
-                type="text"
+                type="number"
                 name="usernameReg"
                 id="usernameReg"
                 value={usernameReg}

@@ -178,7 +178,7 @@ function ReferCompany() {
         {email &&<div><p style={{color: "wheat"}}>{emailError}</p></div>}
         <div className="add-company-form">
           <input
-            type="text"
+            type="number"
             required="true"
             name="phone"
             id="phone"
