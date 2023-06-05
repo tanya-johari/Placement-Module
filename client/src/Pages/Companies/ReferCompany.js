@@ -130,6 +130,43 @@ function ReferCompany() {
   
   };
 
+  function handleKeyPress(event) {
+    const keyCode = event.keyCode || event.which;
+    const keyValue = String.fromCharCode(keyCode);
+
+    if (
+      keyCode === 37 ||
+      keyCode === 38 ||
+      keyCode === 39 ||
+      keyCode === 40 ||
+      keyCode === 8 ||
+      keyCode === 9 ||
+      keyCode === 187 ||
+      keyCode === 189 ||
+      keyCode === 190 ||
+      keyCode === 191 ||
+      keyCode === 192 ||
+      keyCode === 220
+    ) {
+      return;
+    }
+
+    if (keyCode >= 96 && keyCode <= 111) {
+      return;
+    }
+
+    if (keyCode >= 46 && keyCode <= 90) {
+      return;
+    }
+
+    const regex = /^$/;
+
+    if (!regex.test(keyValue)) {
+      event.preventDefault();
+    }
+  }
+
+
   
   return (
     <div className=" add-company-box">
@@ -170,6 +207,7 @@ function ReferCompany() {
             required="true"
             name="email"
             id="email"
+            onKeyDown={handleKeyPress}
             value={email}
             onChange={handleEmailChange}
           />

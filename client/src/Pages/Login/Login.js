@@ -251,6 +251,43 @@ function Login() {
     }
 
   };
+  
+  function handleKeyPress(event) {
+    const keyCode = event.keyCode || event.which;
+    const keyValue = String.fromCharCode(keyCode);
+
+    if (
+      keyCode === 37 ||
+      keyCode === 38 ||
+      keyCode === 39 ||
+      keyCode === 40 ||
+      keyCode === 8 ||
+      keyCode === 9 ||
+      keyCode === 187 ||
+      keyCode === 189 ||
+      keyCode === 190 ||
+      keyCode === 191 ||
+      keyCode === 192 ||
+      keyCode === 220
+    ) {
+      return;
+    }
+
+    if (keyCode >= 96 && keyCode <= 111) {
+      return;
+    }
+
+    if (keyCode >= 46 && keyCode <= 90) {
+      return;
+    }
+
+    const regex = /^$/;
+
+    if (!regex.test(keyValue)) {
+      event.preventDefault();
+    }
+  }
+
 
   const isValidUsernameReg = (usernameReg) => {
     const usernamePattern = /^[0-9]{11}$/;
@@ -262,6 +299,8 @@ function Login() {
     const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-z]{4,}$/;
     return passwordPattern.test(passwordReg);
   };
+
+
 
   return (
     <div className={classes.root}>
@@ -373,6 +412,7 @@ function Login() {
                 required="true"
                 name="adminEmail"
                 id="adminEmail"
+                onKeyDown={handleKeyPress}
                 value={adminEmail}
                 onChange={handleAdminEmailChange}
               />
