@@ -27,7 +27,10 @@ function ReferCompany() {
   const handleRefer = (event) => {
     event.preventDefault();
     if(!cname || !cdescription || !email || !phone || !hrname) {
-      return toast("Please fill out all the fields!", {type: 'warning'});
+      return toast("Please fill out all the fields!", {type: 'info'});
+    }
+    if(!isValidEmail(email) && !isValidPhone(phone) && !isValidhrname(hrname)) {
+      return toast("Please check your fields.", {type: 'info'});
     }
 
       Axios.post(`${baseUrl}/refercompany`, {
